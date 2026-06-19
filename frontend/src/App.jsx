@@ -10,12 +10,14 @@ function App() {
   const [age , setAge] = useState("");
   const [course , setCourse] = useState("");
 
-  
+
   async function connectWallet() {
     const c = await getContract();
     if (!c) return;
 
     setContract(c);
+    const ownerAddress = await c.owner();
+    console.log("Contract owner is:", ownerAddress);
 
     const signerAddress = await c.runner.getAddress();
     setAccount(signerAddress);
@@ -26,6 +28,18 @@ function App() {
 
     const result = await contract.getAllStudents();
     setStudents(result);
+  }
+
+  async function addStudent(){
+    if(!contract) return;
+    const tx = await contract.addStudent(name ,Number(age), course);
+    await tx.wait();
+
+    setName("");
+    setAge("");
+    setCourse("");
+
+    loadStudents();
   }
 
   return (
@@ -40,6 +54,17 @@ function App() {
 
       <button onClick={loadStudents}>Load Students</button>
 
+      <div>
+        <h3>Add Student</h3>
+
+        <input placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
+        <input placeholder="age" value={age} onChange={(e) => setAge(e.target.value)} />
+        <input placeholder="course" value={course} onChange={(e) => setCourse(e.target.value)} />
+
+        <button onClick={addStudent}>Add Student</button>
+
+      </div>
+
       <ul>
         {students.map((s) => (
           <li key={s.id.toString()}>
@@ -48,6 +73,7 @@ function App() {
         ))}
       </ul>
     </div>
+    
   );
 }
 

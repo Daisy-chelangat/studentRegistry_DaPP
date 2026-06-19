@@ -30,7 +30,7 @@ contract StudentRegistry {
     }
 
     constructor(){
-        msg.sender == owner;
+        owner = msg.sender;
     }
 
      function addStudent(string memory _name, uint256 _age, string memory _course) public onlyOwner {
