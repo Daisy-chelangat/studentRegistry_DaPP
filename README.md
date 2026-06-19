@@ -24,11 +24,11 @@ Smart Contract
 
 Deployed Address (Sepolia):
 
-
+0x843DBBE08Ceab2bd26aADd7DB70a6c0bA23c840
 
 View on Etherscan:
 
-https://sepolia.etherscan.io/address/0x7082154Ba8824B728e1D595e03d953f6cb984Cf6
+https://sepolia.etherscan.io/address/0x843DBBE08Ceab2bd26aADd7DB70a6c0bA23c840
 
 Project Structure
 
